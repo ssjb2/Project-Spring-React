@@ -1,4 +1,4 @@
-package services;
+package gb.services;
 
 
 import gb.domain.Groups;

@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-public class Group {
+public class Groups {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +20,7 @@ public class Group {
     private Date created_At;
     private Date updated_At;
 
-    public Group(){
+    public Groups(){
 
     }
 

@@ -20,6 +20,6 @@ public class GroupsController {
     @PostMapping("")
     public ResponseEntity<Groups> createNewGroup(@RequestBody Groups groups){
         Groups groups1 = groupsService.saveOrUpdateGroup(groups);
-        return new ResponseEntity<Groups>(groups,HttpStatus.CREATED);
+        return new ResponseEntity<Groups>(groups1,HttpStatus.CREATED);
     }
 }

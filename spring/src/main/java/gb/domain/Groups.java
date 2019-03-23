@@ -1,6 +1,12 @@
 package gb.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.annotations.CollectionId;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
@@ -10,14 +16,23 @@ public class Groups {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
+    @NotBlank(message = "Group name is required")
     private String groupName;
+    @NotBlank(message = "Group Identifier is required")
+    @Size(min = 4, max = 5, message = "Please use 4 or 5 characters")
+    @Column(updatable = false, unique = true)
     private String groupIdentifier;
+    @NotBlank(message = "Group description is required")
     private String description;
+
+    @JsonFormat(pattern = "yyyy-mm-dd")
     private Date start_date;
+    @JsonFormat(pattern = "yyyy-mm-dd")
     private Date end_date;
 
+    @JsonFormat(pattern = "yyyy-mm-dd")
     private Date created_At;
+    @JsonFormat(pattern = "yyyy-mm-dd")
     private Date updated_At;
 
     public Groups(){

@@ -22,4 +22,12 @@ public class GroupsService {
         }
 
     }
+
+    public Groups findGroupByIdentifier(String groupId){
+        Groups groups = groupsRepository.findByGroupIdentifier(groupId);
+        if(groups==null){
+            throw new GroupIdException("Group ID '"+groupId+"' does not exists");
+        }
+        return groups;
+    }
 }

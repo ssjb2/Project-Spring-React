@@ -7,11 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import gb.services.GroupsService;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import javax.validation.Valid;
 import java.util.HashMap;
@@ -35,5 +33,11 @@ public class GroupsController {
 
         Groups groups1 = groupsService.saveOrUpdateGroup(groups);
         return new ResponseEntity<Groups>(groups1,HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{groupId}")
+    public ResponseEntity<?> getGroupById(@PathVariable String groupId){
+        Groups groups = groupsService.findGroupByIdentifier(groupId);
+        return new ResponseEntity<Groups>(groups, HttpStatus.OK);
     }
 }

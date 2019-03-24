@@ -1,6 +1,7 @@
 package gb.web;
 
 import gb.domain.Groups;
+import gb.services.MapValidationErrorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,17 +24,14 @@ public class GroupsController {
 
     @Autowired
     GroupsService groupsService;
+    @Autowired
+    private MapValidationErrorService mapValidationErrorServicel;
 
     @PostMapping("")
     public ResponseEntity<?> createNewGroup(@Valid @RequestBody Groups groups, BindingResult result){
-        if(result.hasErrors()){
-            Map<String, String> errorMap = new HashMap<>();
-            for(FieldError error: result.getFieldErrors()){
-                errorMap.put(error.getField(),error.getDefaultMessage());
-            }
-            return new ResponseEntity<Map<String,String>>(errorMap, HttpStatus.BAD_REQUEST);
-        }
 
+        ResponseEntity<?>errorMap = mapValidationErrorServicel.MapValidationService(result);
+        if(errorMap!=null)return errorMap;
 
         Groups groups1 = groupsService.saveOrUpdateGroup(groups);
         return new ResponseEntity<Groups>(groups1,HttpStatus.CREATED);

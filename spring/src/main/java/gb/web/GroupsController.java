@@ -51,4 +51,5 @@ public class GroupsController {
         groupsService.deleteGroupById(groupId);
         return new ResponseEntity<String>("Group with Id'" +groupId+"'was deleted", HttpStatus.OK);
     }
+
 }

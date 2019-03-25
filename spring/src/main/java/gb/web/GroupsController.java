@@ -45,4 +45,10 @@ public class GroupsController {
     public Iterable<Groups> getAllGroups(){
         return groupsService.findAllGroups();
     }
+
+    @DeleteMapping("/{groupId}")
+    public ResponseEntity<?> deleteGroup(@PathVariable String groupId){
+        groupsService.deleteGroupById(groupId);
+        return new ResponseEntity<String>("Group with Id'" +groupId+"'was deleted", HttpStatus.OK);
+    }
 }

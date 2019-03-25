@@ -34,4 +34,12 @@ public class GroupsService {
     public Iterable<Groups> findAllGroups(){
         return groupsRepository.findAll();
     }
+
+    public void deleteGroupById(String groupId){
+        Groups groups = groupsRepository.findByGroupIdentifier(groupId.toUpperCase());
+        if(groups==null){
+            throw new GroupIdException("Cannot delete group with ID '"+groupId+"'. This group does not exist");
+        }
+        groupsRepository.delete(groups);
+    }
 }

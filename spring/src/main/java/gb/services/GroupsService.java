@@ -30,4 +30,8 @@ public class GroupsService {
         }
         return groups;
     }
+
+    public Iterable<Groups> findAllGroups(){
+        return groupsRepository.findAll();
+    }
 }

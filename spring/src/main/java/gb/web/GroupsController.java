@@ -40,4 +40,9 @@ public class GroupsController {
         Groups groups = groupsService.findGroupByIdentifier(groupId);
         return new ResponseEntity<Groups>(groups, HttpStatus.OK);
     }
+
+    @GetMapping("/all")
+    public Iterable<Groups> getAllGroups(){
+        return groupsService.findAllGroups();
+    }
 }

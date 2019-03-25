@@ -9,4 +9,7 @@ import org.springframework.stereotype.Repository;
 public interface GroupsRepository extends CrudRepository<Groups, Long> {
 
     Groups findByGroupIdentifier(String groupId);
+
+    @Override
+    Iterable<Groups> findAll();
 }

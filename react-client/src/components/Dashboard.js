@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import GroupItem from "./Group/GroupItem";
+import CreateGroupButton from "./Group/CreateGroupButton";
 
 class Dashboard extends Component {
   render() {
@@ -10,9 +11,7 @@ class Dashboard extends Component {
             <div className="col-md-12">
               <h1 className="display-4 text-center">Groups</h1>
               <br />
-              <a href="GroupForm.html" className="btn btn-lg btn-info">
-                Create a Group
-              </a>
+              <CreateGroupButton />
               <br />
               <hr />
             </div>

@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { createGroup } from "../../actions/groupActions";
 
 class AddGroup extends Component {
   constructor() {
@@ -21,7 +24,7 @@ class AddGroup extends Component {
       groupIdentifier: this.state.groupIdentifier,
       description: this.state.description
     };
-    console.log(newGroup);
+    this.props.createGroup(newGroup, this.props.history);
   }
   render() {
     return (
@@ -75,4 +78,11 @@ class AddGroup extends Component {
     );
   }
 }
-export default AddGroup;
+AddGroup.propTypes = {
+  createGroup: PropTypes.func.isRequired
+};
+
+export default connect(
+  null,
+  { createGroup }
+)(AddGroup);

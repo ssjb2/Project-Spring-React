@@ -9,10 +9,17 @@ class AddGroup extends Component {
     this.state = {
       groupName: "",
       groupIdentifier: "",
-      description: ""
+      description: "",
+      errors: {}
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+  }
+  //life cycle hooks
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
   }
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
@@ -27,6 +34,7 @@ class AddGroup extends Component {
     this.props.createGroup(newGroup, this.props.history);
   }
   render() {
+    const { errors } = this.state;
     return (
       <div className="register">
         <div className="container">
@@ -44,6 +52,7 @@ class AddGroup extends Component {
                     value={this.state.groupName}
                     onChange={this.onChange}
                   />
+                  <p>{errors.groupName}</p>
                 </div>
                 <div className="form-group">
                   <input
@@ -54,6 +63,7 @@ class AddGroup extends Component {
                     value={this.state.groupIdentifier}
                     onChange={this.onChange}
                   />
+                  <p>{errors.groupIdentifier}</p>
                 </div>
 
                 <div className="form-group">
@@ -64,6 +74,7 @@ class AddGroup extends Component {
                     value={this.state.description}
                     onChange={this.onChange}
                   />
+                  <p>{errors.description}</p>
                 </div>
 
                 <input
@@ -79,10 +90,14 @@ class AddGroup extends Component {
   }
 }
 AddGroup.propTypes = {
-  createGroup: PropTypes.func.isRequired
+  createGroup: PropTypes.func.isRequired,
+  errors: PropTypes.object.isRequired
 };
 
+const mapStateToProps = state => ({
+  errors: state.errors
+});
 export default connect(
-  null,
+  mapStateToProps,
   { createGroup }
 )(AddGroup);

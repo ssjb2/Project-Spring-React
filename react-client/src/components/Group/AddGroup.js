@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createGroup } from "../../actions/groupActions";
-
+import classnames from "classnames";
 class AddGroup extends Component {
   constructor() {
     super();
@@ -46,35 +46,48 @@ class AddGroup extends Component {
                 <div className="form-group">
                   <input
                     type="text"
-                    className="form-control form-control-lg "
-                    placeholder="Group Name"
+                    className={classnames("form-control form-control-lg ", {
+                      "is-invalid": errors.groupName
+                    })}
                     name="groupName"
                     value={this.state.groupName}
                     onChange={this.onChange}
                   />
-                  <p>{errors.groupName}</p>
+                  {errors.groupName && (
+                    <div className="invalid-feedback">{errors.groupName}</div>
+                  )}
                 </div>
                 <div className="form-group">
                   <input
                     type="text"
-                    className="form-control form-control-lg"
+                    className={classnames("form-control form-control-lg ", {
+                      "is-invalid": errors.groupIdentifier
+                    })}
                     placeholder="Unique Group ID"
                     name="groupIdentifier"
                     value={this.state.groupIdentifier}
                     onChange={this.onChange}
                   />
-                  <p>{errors.groupIdentifier}</p>
+                  {errors.groupIdentifier && (
+                    <div className="invalid-feedback">
+                      {errors.groupIdentifier}
+                    </div>
+                  )}
                 </div>
 
                 <div className="form-group">
                   <textarea
-                    className="form-control form-control-lg"
+                    className={classnames("form-control form-control-lg ", {
+                      "is-invalid": errors.description
+                    })}
                     placeholder="Group Description"
                     name="description"
                     value={this.state.description}
                     onChange={this.onChange}
                   />
-                  <p>{errors.description}</p>
+                  {errors.description && (
+                    <div className="invalid-feedback">{errors.description}</div>
+                  )}
                 </div>
 
                 <input

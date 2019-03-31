@@ -2,17 +2,24 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createGroup } from "../../actions/groupActions";
-
+import classnames from "classnames";
 class AddGroup extends Component {
   constructor() {
     super();
     this.state = {
       groupName: "",
       groupIdentifier: "",
-      description: ""
+      description: "",
+      errors: {}
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+  }
+  //life cycle hooks
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
   }
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
@@ -27,6 +34,7 @@ class AddGroup extends Component {
     this.props.createGroup(newGroup, this.props.history);
   }
   render() {
+    const { errors } = this.state;
     return (
       <div className="register">
         <div className="container">
@@ -38,32 +46,48 @@ class AddGroup extends Component {
                 <div className="form-group">
                   <input
                     type="text"
-                    className="form-control form-control-lg "
-                    placeholder="Group Name"
+                    className={classnames("form-control form-control-lg ", {
+                      "is-invalid": errors.groupName
+                    })}
                     name="groupName"
                     value={this.state.groupName}
                     onChange={this.onChange}
                   />
+                  {errors.groupName && (
+                    <div className="invalid-feedback">{errors.groupName}</div>
+                  )}
                 </div>
                 <div className="form-group">
                   <input
                     type="text"
-                    className="form-control form-control-lg"
+                    className={classnames("form-control form-control-lg ", {
+                      "is-invalid": errors.groupIdentifier
+                    })}
                     placeholder="Unique Group ID"
                     name="groupIdentifier"
                     value={this.state.groupIdentifier}
                     onChange={this.onChange}
                   />
+                  {errors.groupIdentifier && (
+                    <div className="invalid-feedback">
+                      {errors.groupIdentifier}
+                    </div>
+                  )}
                 </div>
 
                 <div className="form-group">
                   <textarea
-                    className="form-control form-control-lg"
+                    className={classnames("form-control form-control-lg ", {
+                      "is-invalid": errors.description
+                    })}
                     placeholder="Group Description"
                     name="description"
                     value={this.state.description}
                     onChange={this.onChange}
                   />
+                  {errors.description && (
+                    <div className="invalid-feedback">{errors.description}</div>
+                  )}
                 </div>
 
                 <input
@@ -79,10 +103,14 @@ class AddGroup extends Component {
   }
 }
 AddGroup.propTypes = {
-  createGroup: PropTypes.func.isRequired
+  createGroup: PropTypes.func.isRequired,
+  errors: PropTypes.object.isRequired
 };
 
+const mapStateToProps = state => ({
+  errors: state.errors
+});
 export default connect(
-  null,
+  mapStateToProps,
   { createGroup }
 )(AddGroup);

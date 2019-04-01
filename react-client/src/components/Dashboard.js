@@ -11,6 +11,7 @@ class Dashboard extends Component {
   }
 
   render() {
+    const groups = this.props.group.groups;
     return (
       <div className="projects">
         <div className="container">
@@ -22,7 +23,9 @@ class Dashboard extends Component {
               <br />
               <hr />
             </div>
-            <GroupItem />
+            {groups.map(group => (
+              <GroupItem key={group.id} group={group} />
+            ))}
           </div>
         </div>
       </div>

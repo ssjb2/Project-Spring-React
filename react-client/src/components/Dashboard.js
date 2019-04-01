@@ -33,7 +33,7 @@ class Dashboard extends Component {
   }
 }
 Dashboard.propTypes = {
-  groups: PropTypes.object.isRequired,
+  group: PropTypes.object.isRequired,
   getGroups: PropTypes.func.isRequired
 };
 

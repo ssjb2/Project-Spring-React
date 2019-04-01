@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 class GroupItem extends Component {
   render() {
@@ -21,11 +22,11 @@ class GroupItem extends Component {
                     <i className="fa fa-flag-checkered pr-1"> Group Board </i>
                   </li>
                 </a>
-                <a href="#">
+                <Link to={`/updateGroup/${group.groupIdentifier}`}>
                   <li className="list-group-item update">
                     <i className="fa fa-edit pr-1"> Update Group Info</i>
                   </li>
-                </a>
+                </Link>
                 <a href="">
                   <li className="list-group-item delete">
                     <i className="fa fa-minus-circle pr-1"> Delete Group</i>

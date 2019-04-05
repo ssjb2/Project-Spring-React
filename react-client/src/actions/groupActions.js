@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_ERRORS, GET_GROUPS } from "../actions/types";
+import { GET_ERRORS, GET_GROUPS, GET_GROUP } from "../actions/types";
 
 export const createGroup = (group, history) => async dispatch => {
   try {
@@ -17,6 +17,14 @@ export const getGroups = () => async dispatch => {
   const res = await axios.get("http://localhost:8080/api/groups/all");
   dispatch({
     type: GET_GROUPS,
+    payload: res.data
+  });
+};
+
+export const getGroup = (id, history) => async dispatch => {
+  const res = await axios.get(`http://localhost:8080/api/groups/${id}`);
+  dispatch({
+    type: GET_GROUP,
     payload: res.data
   });
 };

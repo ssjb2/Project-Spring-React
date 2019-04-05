@@ -1,4 +1,4 @@
-import { GET_GROUPS } from "../actions/types";
+import { GET_GROUPS, GET_GROUP } from "../actions/types";
 
 const initialState = {
   groups: [],
@@ -11,6 +11,12 @@ export default function(state = initialState, action) {
       return {
         ...state,
         groups: action.payload
+      };
+
+    case GET_GROUP:
+      return {
+        ...state,
+        group: action.payload
       };
 
     default:

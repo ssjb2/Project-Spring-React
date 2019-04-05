@@ -1,6 +1,13 @@
 import React, { Component } from "react";
-
-export default class UpdateGroup extends Component {
+import { getGroup } from "../../actions/groupActions";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import classnames from "classnames";
+class UpdateGroup extends Component {
+  componentDidMount() {
+    const { id } = this.props.match.params;
+    this.props.getGroup(id, this.props.history);
+  }
   render() {
     return (
       <div className="register">
@@ -44,3 +51,15 @@ export default class UpdateGroup extends Component {
     );
   }
 }
+UpdateGroup.propTypes = {
+  getGroup: PropTypes.func.isRequired,
+  group: PropTypes.object.isRequired
+};
+const mapStateToProps = state => ({
+  group: state.group.group
+});
+
+export default connect(
+  mapStateToProps,
+  { getGroup }
+)(UpdateGroup);

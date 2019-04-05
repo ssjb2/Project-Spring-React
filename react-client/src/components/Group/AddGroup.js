@@ -49,6 +49,7 @@ class AddGroup extends Component {
                     className={classnames("form-control form-control-lg ", {
                       "is-invalid": errors.groupName
                     })}
+                    placeholder="Group Name"
                     name="groupName"
                     value={this.state.groupName}
                     onChange={this.onChange}

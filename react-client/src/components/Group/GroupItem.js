@@ -1,7 +1,13 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { deleteGroup } from "../../actions/groupActions";
 
 class GroupItem extends Component {
+  onDeleteClick = id => {
+    this.props.deleteGroup(id);
+  };
   render() {
     const { group } = this.props;
     return (
@@ -27,11 +33,13 @@ class GroupItem extends Component {
                     <i className="fa fa-edit pr-1"> Update Group Info</i>
                   </li>
                 </Link>
-                <a href="">
-                  <li className="list-group-item delete">
-                    <i className="fa fa-minus-circle pr-1"> Delete Group</i>
-                  </li>
-                </a>
+
+                <li
+                  className="list-group-item delete"
+                  onClick={this.onDeleteClick.bind(this, group.groupIdentifier)}
+                >
+                  <i className="fa fa-minus-circle pr-1"> Delete Group</i>
+                </li>
               </ul>
             </div>
           </div>
@@ -40,4 +48,11 @@ class GroupItem extends Component {
     );
   }
 }
-export default GroupItem;
+
+GroupItem.propTypes = {
+  deleteGroup: PropTypes.func.isRequired
+};
+export default connect(
+  null,
+  { deleteGroup }
+)(GroupItem);

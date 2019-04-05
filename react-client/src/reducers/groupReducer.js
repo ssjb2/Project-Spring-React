@@ -1,4 +1,4 @@
-import { GET_GROUPS, GET_GROUP } from "../actions/types";
+import { GET_GROUPS, GET_GROUP, DELETE_GROUP } from "../actions/types";
 
 const initialState = {
   groups: [],
@@ -17,6 +17,13 @@ export default function(state = initialState, action) {
       return {
         ...state,
         group: action.payload
+      };
+    case DELETE_GROUP:
+      return {
+        ...state,
+        groups: state.groups.filter(
+          group => group.groupIdentifier !== action.payload
+        ) //filtruje tego co nie ma za pomoca js6 filter
       };
 
     default:

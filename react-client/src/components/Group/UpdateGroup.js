@@ -11,7 +11,8 @@ class UpdateGroup extends Component {
       id: "",
       groupName: "",
       groupIdentifier: "",
-      description: ""
+      description: "",
+      errors: {}
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -20,6 +21,9 @@ class UpdateGroup extends Component {
     const { id, groupName, groupIdentifier, description } = nextProps.group;
 
     this.setState({ id, groupName, groupIdentifier, description });
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
   }
   componentDidMount() {
     const { id } = this.props.match.params;
@@ -41,6 +45,7 @@ class UpdateGroup extends Component {
     this.props.createGroup(updateGroup, this.props.history);
   }
   render() {
+    const { errors } = this.state;
     return (
       <div className="register">
         <div className="container">
@@ -52,12 +57,17 @@ class UpdateGroup extends Component {
                 <div className="form-group">
                   <input
                     type="text"
-                    className="form-control form-control-lg "
+                    className={classnames("form-control form-control-lg ", {
+                      "is-invalid": errors.groupName
+                    })}
                     placeholder="Group Name"
                     name="groupName"
                     value={this.state.groupName}
                     onChange={this.onChange}
                   />
+                  {errors.groupName && (
+                    <div className="invalid-feedback">{errors.groupName}</div>
+                  )}
                 </div>
                 <div className="form-group">
                   <input
@@ -71,12 +81,17 @@ class UpdateGroup extends Component {
                 </div>
                 <div className="form-group">
                   <textarea
-                    className="form-control form-control-lg"
+                    className={classnames("form-control form-control-lg ", {
+                      "is-invalid": errors.description
+                    })}
                     placeholder="Group Description"
                     name="description"
                     value={this.state.description}
                     onChange={this.onChange}
                   />
+                  {errors.description && (
+                    <div className="invalid-feedback">{errors.description}</div>
+                  )}
                 </div>
 
                 <input
@@ -94,10 +109,12 @@ class UpdateGroup extends Component {
 UpdateGroup.propTypes = {
   getGroup: PropTypes.func.isRequired,
   createGroup: PropTypes.func.isRequired,
-  group: PropTypes.object.isRequired
+  group: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
 };
 const mapStateToProps = state => ({
-  group: state.group.group
+  group: state.group.group,
+  errors: state.errors
 });
 
 export default connect(

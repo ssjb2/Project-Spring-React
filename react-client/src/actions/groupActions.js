@@ -22,9 +22,13 @@ export const getGroups = () => async dispatch => {
 };
 
 export const getGroup = (id, history) => async dispatch => {
-  const res = await axios.get(`http://localhost:8080/api/groups/${id}`);
-  dispatch({
-    type: GET_GROUP,
-    payload: res.data
-  });
+  try {
+    const res = await axios.get(`http://localhost:8080/api/groups/${id}`);
+    dispatch({
+      type: GET_GROUP,
+      payload: res.data
+    });
+  } catch (error) {
+    history.push("/dashboard");
+  }
 };

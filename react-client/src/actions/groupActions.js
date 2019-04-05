@@ -5,6 +5,10 @@ export const createGroup = (group, history) => async dispatch => {
   try {
     const res = await axios.post("http://localhost:8080/api/groups", group);
     history.push("/dashboard");
+    dispatch({
+      type: GET_ERRORS,
+      payload: {}
+    });
   } catch (err) {
     dispatch({
       type: GET_ERRORS,

@@ -3,6 +3,8 @@ package gb.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Backlog {
@@ -17,11 +19,22 @@ public class Backlog {
     @JoinColumn(name = "group_id", nullable = false)
     @JsonIgnore
     private Groups group;
+
+    @OneToMany(cascade = CascadeType.ALL , fetch = FetchType.EAGER, mappedBy = "backlog")
+    private List<GroupPost> groupPost = new ArrayList<>();
     public Backlog() {
     }
 
     public Long getId() {
         return id;
+    }
+
+    public List<GroupPost> getGroupPost() {
+        return groupPost;
+    }
+
+    public void setGroupPost(List<GroupPost> groupPost) {
+        this.groupPost = groupPost;
     }
 
     public void setId(Long id) {

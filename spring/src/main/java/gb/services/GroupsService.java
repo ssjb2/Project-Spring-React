@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class GroupsService {
-    
+
     @Autowired
     private GroupsRepository groupsRepository;
 

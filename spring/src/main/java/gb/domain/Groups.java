@@ -31,6 +31,7 @@ public class Groups {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date updated_At;
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "group")
+
     private Backlog backlog;
     public Groups() {
 

@@ -1,6 +1,7 @@
 package gb.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CollectionId;
 
 import javax.persistence.*;
@@ -31,7 +32,7 @@ public class Groups {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date updated_At;
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "group")
-
+    @JsonIgnore
     private Backlog backlog;
     public Groups() {
 

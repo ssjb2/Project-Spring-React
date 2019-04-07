@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.swing.*;
+import java.util.List;
 
 @Service
 public class GroupPostService {
@@ -31,4 +32,8 @@ public class GroupPostService {
             groupPost.setStatus("ACTIVE");
         }
     return groupPostRepository.save(groupPost);}
+
+    public Iterable<GroupPost> findBacklogById(String id) {
+        return groupPostRepository.findByGroupIdentifier(id);
+    }
 }

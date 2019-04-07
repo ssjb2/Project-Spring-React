@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/backlog")
@@ -34,5 +35,10 @@ public class BacklogController {
         GroupPost groupPost1 = groupPostService.addGroupPost(backlog_id, groupPost);
 
         return new ResponseEntity<GroupPost>(groupPost1, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{backlog_id}")
+    public Iterable<GroupPost> getGroupBacklog(@PathVariable String backlog_id){
+        return groupPostService.findBacklogById(backlog_id);
     }
 }

@@ -18,4 +18,10 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
         GroupIdExceptionsResponse exceptionsResponse = new GroupIdExceptionsResponse(ex.getMessage());
         return new ResponseEntity<>(exceptionsResponse, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler
+    public final ResponseEntity<Object> handleGroupNotFoundException(GroupNotFoundException ex , WebRequest request){
+        GroupNotFoundExceptionResponse exceptionsResponse = new GroupNotFoundExceptionResponse(ex.getMessage());
+        return new ResponseEntity<>(exceptionsResponse, HttpStatus.BAD_REQUEST);
+    }
 }

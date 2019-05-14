@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface GroupPostRepository extends CrudRepository<GroupPost, Long> {
     List<GroupPost> findByGroupIdentifier(String id);
+    GroupPost findByGroupSequence(String gp_id);
+
 }

@@ -13,10 +13,11 @@ public class GroupPost {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(updatable = false)
+    @Column(updatable = false, unique = true)
     private String groupSequence;
     @NotBlank(message = "Please enter a title")
     private String title;
+    @NotBlank(message = "Please write something")
     private String body;
     private String status;
     private String acceptanceCriteria;

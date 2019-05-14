@@ -41,4 +41,10 @@ public class BacklogController {
     public Iterable<GroupPost> getGroupBacklog(@PathVariable String backlog_id){
         return groupPostService.findBacklogById(backlog_id);
     }
+
+    @GetMapping("/{backlog_id}/{gp_id}")
+    public ResponseEntity<?> getGroupPost(@PathVariable String backlog_id, @PathVariable String gp_id){
+        GroupPost groupPost = groupPostService.findGPByGroupSequnce(backlog_id, gp_id);
+        return new ResponseEntity<GroupPost>(groupPost, HttpStatus.OK);
+    }
 }

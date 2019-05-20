@@ -24,7 +24,7 @@ public class GroupPost {
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(updatable = false)
     private Date created_At;
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private Date dueDate;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date updated_At;

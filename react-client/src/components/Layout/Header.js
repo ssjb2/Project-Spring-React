@@ -16,15 +16,15 @@ class Header extends Component {
       <div className="collapse navbar-collapse" id="mobile-nav">
         <ul className="navbar-nav mr-auto">
           <li className="nav-item">
-            <Link className="nav-link" to="/pharmacy">
-              Pharmacy
+            <Link className="nav-link" to="/dashboard">
+              Groups
             </Link>
           </li>
         </ul>
 
         <ul className="navbar-nav ml-auto">
           <li className="nav-item">
-            <Link className="nav-link" to="/pharmacy">
+            <Link className="nav-link" to="/dashboard">
               <i className="fas fa-user-circle mr-1" />
               {user.username}
             </Link>

@@ -8,7 +8,7 @@ import {
 
 export const createGroup = (group, history) => async dispatch => {
   try {
-    const res = await axios.post("/api/groups", group);
+    await axios.post("/api/groups", group);
     history.push("/dashboard");
     dispatch({
       type: GET_ERRORS,

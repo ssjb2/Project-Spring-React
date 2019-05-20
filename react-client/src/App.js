@@ -16,6 +16,9 @@ import { SET_CURRENT_USER } from "./actions/types";
 import { logout } from "./actions/securityActions";
 import SecuredRoute from "./securityUtils/SecureRoute";
 import Landing from "./components/Layout/Landing";
+import AddGroupPost from "./components/GroupBoard/GroupPost/AddGroupPost";
+import GroupBoard from "./components/GroupBoard/GroupBoard";
+import UpdateGroupPost from "./components/GroupBoard/GroupPost/UpdateGroupPost";
 
 const jwtToken = localStorage.jwtToken;
 
@@ -44,6 +47,7 @@ class App extends Component {
             <Route exact path="/" component={Landing} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
+
             <Switch>
               <SecuredRoute exact path="/Dashboard" component={Dashboard} />
               <SecuredRoute exact path="/addGroup" component={AddGroup} />
@@ -51,6 +55,21 @@ class App extends Component {
                 exact
                 path="/updateGroup/:id"
                 component={UpdateGroup}
+              />
+              <SecuredRoute
+                exact
+                path="/GroupBoard/:id"
+                component={GroupBoard}
+              />
+              <SecuredRoute
+                exact
+                path="/addGroupPost/:id"
+                component={AddGroupPost}
+              />
+              <Route
+                exact
+                path="/updateGroupPost/:backlog_id/:gp_id"
+                component={UpdateGroupPost}
               />
             </Switch>
           </div>

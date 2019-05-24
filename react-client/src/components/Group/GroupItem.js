@@ -33,13 +33,14 @@ class GroupItem extends Component {
                     <i className="fa fa-edit pr-1"> Update Group Info</i>
                   </li>
                 </Link>
-
+                {/* 
                 <li
                   className="list-group-item delete"
                   onClick={this.onDeleteClick.bind(this, group.groupIdentifier)}
                 >
                   <i className="fa fa-minus-circle pr-1"> Delete Group</i>
-                </li>
+</li>
+*/}
               </ul>
             </div>
           </div>

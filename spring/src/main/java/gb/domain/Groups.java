@@ -8,7 +8,10 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Groups {
@@ -34,6 +37,24 @@ public class Groups {
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "group")
     @JsonIgnore
     private Backlog backlog;
+
+    @ManyToMany
+    private List<User> usersInGroup;
+
+    public List<User> getUsersInGroup() {
+        return usersInGroup;
+    }
+
+    public void setUsersInGroup(List<User> usersInGroup) {
+        this.usersInGroup = usersInGroup;
+    }
+
+    public void addMember(User user){
+        usersInGroup.add(user);
+    }
+
+
+
     public Groups() {
 
     }

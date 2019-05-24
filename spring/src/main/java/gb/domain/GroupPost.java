@@ -36,6 +36,17 @@ public class GroupPost {
     @JsonIgnore
     private Backlog backlog;
 
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
+    }
+
+    @ManyToOne
+    private User author;
+
     public Backlog getBacklog() {
         return backlog;
     }

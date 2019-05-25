@@ -4,7 +4,7 @@ import GroupPost from "./GroupPost/GroupPost";
 class Backlog extends Component {
   render() {
     const { group_posts_prop } = this.props;
-
+    console.log(this.props);
     const posts = group_posts_prop.map(group_post => (
       <GroupPost key={group_post.id} group_post={group_post} />
     ));

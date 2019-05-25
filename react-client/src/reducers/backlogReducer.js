@@ -1,12 +1,15 @@
 import {
   GET_BACKLOG,
   GET_GROUP_POST,
-  DELETE_GROUP_POST
+  DELETE_GROUP_POST,
+  GET_COMMENTS
 } from "../actions/types";
 
 const initialState = {
   group_posts: [],
-  group_post: {}
+  group_post: {},
+  comments: [],
+  comment: {}
 };
 
 export default function(state = initialState, action) {
@@ -28,6 +31,13 @@ export default function(state = initialState, action) {
         ...state
 
         // TO_DO
+      };
+
+    case GET_COMMENTS:
+      return {
+        ...state,
+        comments: action.payload,
+        comment: action.payload
       };
 
     default:

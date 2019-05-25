@@ -24,7 +24,6 @@ class GroupBoard extends Component {
     const { id } = this.props.match.params;
     const { group_posts } = this.props.backlog;
     const { errors } = this.state;
-
     let BoardContent;
 
     const boardAlgorithm = (errors, group_posts) => {

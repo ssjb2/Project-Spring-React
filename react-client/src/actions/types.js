@@ -8,3 +8,5 @@ export const GET_GROUP_POST = "GET_GROUP_POST";
 export const DELETE_GROUP_POST = "DELETE_GROUP_POST";
 
 export const SET_CURRENT_USER = "SET_CURRENT_USER";
+
+export const GET_COMMENTS = "GET_COMMENTS";

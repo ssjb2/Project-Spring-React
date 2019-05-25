@@ -9,9 +9,9 @@ img {
   color: #18a2b9;
 }
 
-.list-group-item.delete:hover {
+.list-group-item.join:hover {
   cursor: -webkit-grab;
-  background-color: pink;
+  background-color: greenyellow;
 }
 
 .list-group-item.update:hover {

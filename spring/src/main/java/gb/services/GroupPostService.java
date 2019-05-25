@@ -1,17 +1,12 @@
 package gb.services;
 
-import gb.domain.Backlog;
-import gb.domain.GroupPost;
-import gb.domain.Groups;
+import gb.domain.*;
 import gb.exceptions.GroupNotFoundException;
-import gb.repositories.BacklogRepository;
-import gb.repositories.GroupPostRepository;
-import gb.repositories.GroupsRepository;
+import gb.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.swing.*;
-import java.util.List;
+import java.util.Optional;
 
 @Service
 public class GroupPostService {
@@ -25,8 +20,14 @@ public class GroupPostService {
     @Autowired
     private GroupsRepository groupsRepository;
 
+    @Autowired
+    private UserRepository userRepository;
 
-    public GroupPost addGroupPost(String groupIdentifier, GroupPost groupPost) {
+    @Autowired
+    private CommentRepository commentRepository;
+
+
+    public GroupPost addGroupPost(String groupIdentifier, GroupPost groupPost, String name) {
         try {
             Backlog backlog = backlogRepository.findByGroupIdentifier(groupIdentifier);
             groupPost.setBacklog(backlog);
@@ -36,6 +37,8 @@ public class GroupPostService {
             groupPost.setGroupSequence(groupIdentifier + "-" + BacklogSequence);
             groupPost.setGroupIdentifier(groupIdentifier);
 
+            User user= userRepository.findByUsername(name);
+            groupPost.setAuthor(user);
             if (groupPost.getStatus() == "" || groupPost.getStatus() == null) {
                 groupPost.setStatus("ACTIVE");
             }
@@ -58,5 +61,25 @@ public class GroupPostService {
 
     public GroupPost findGPByGroupSequnce(String backlog_id, String gp_id) {
         return groupPostRepository.findByGroupSequence(gp_id);
+    }
+
+    public GroupPost updateByGroupSequence(GroupPost uupdatedPost, String backlog_id, String pt_id, String name) {
+        GroupPost groupPost = findGPByGroupSequnce(backlog_id,pt_id);
+
+        groupPost = uupdatedPost;
+        return groupPostRepository.save(groupPost);
+    }
+
+    public Comment saveComment(Comment comment,Long gp_id, String name){
+        Optional<GroupPost> groupPost = groupPostRepository.findById(gp_id);
+        User user = userRepository.findByUsername(name);
+        comment.setAuthor(user);
+        comment.setPost(groupPost.get());
+        return commentRepository.save(comment);
+
+    }
+
+    public Iterable<Comment> findCommentById(Long post_id) {
+        return commentRepository.findByPostId(post_id);
     }
 }

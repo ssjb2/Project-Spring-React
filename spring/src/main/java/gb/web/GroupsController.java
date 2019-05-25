@@ -61,5 +61,15 @@ public class GroupsController {
 
         return new ResponseEntity<String>("Joined", HttpStatus.OK);
     }
+    @GetMapping("/join/_count?{groupId}")
+    public ResponseEntity<?> countGroup(@PathVariable String groupId, Principal principal){
+
+        String usrname = principal.getName();
+        groupsService.joinGroup(groupId, usrname);
+
+        return new ResponseEntity<String>("Joined", HttpStatus.OK);
+    }
+
+
 
 }

@@ -54,3 +54,18 @@ export const deleteGroup = id => async dispatch => {
     payload: id
   });
 };
+
+export const joinGroup = id => async dispatch => {
+  try {
+    const res = await axios.post(`/api/groups/join/${id}`);
+    dispatch({
+      type: GET_ERRORS,
+      payload: {}
+    });
+  } catch (err) {
+    dispatch({
+      type: GET_ERRORS,
+      payload: err.response.data
+    });
+  }
+};

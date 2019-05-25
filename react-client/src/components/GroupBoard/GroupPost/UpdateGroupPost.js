@@ -63,6 +63,17 @@ class UpdateGroupPost extends Component {
   onSubmit(e) {
     e.preventDefault();
 
+    const UpdateGroupPost = {
+      id: this.state.id,
+      title: this.state.title,
+      groupSequence: this.state.groupSequence,
+      body: this.state.body,
+      acceptanceCriteria: this.state.acceptanceCriteria,
+      status: this.state.status,
+      dueDate: this.state.dueDate,
+      groupIdentifier: this.state.groupIdentifier,
+      create_A: this.state.create_At
+    };
     this.props.updateGroupPost(
       this.state.groupIdentifier,
       this.state.groupSequence,
@@ -95,6 +106,21 @@ class UpdateGroupPost extends Component {
                     className={classnames("form-control form-control-lg", {
                       "is-invalid": errors.body
                     })}
+                    name="title"
+                    placeholder="Say something"
+                    value={this.state.title}
+                    onChange={this.onChange}
+                  />
+                  {errors.title && (
+                    <div className="invalid-feedback">{errors.title}</div>
+                  )}
+                </div>
+                <div className="form-group">
+                  <input
+                    type="text"
+                    className={classnames("form-control form-control-lg", {
+                      "is-invalid": errors.body
+                    })}
                     name="body"
                     placeholder="Say something"
                     value={this.state.body}
@@ -105,7 +131,7 @@ class UpdateGroupPost extends Component {
                   )}
                 </div>
                 <div className="form-group">
-                  <textarea
+                  <input
                     className="form-control form-control-lg"
                     placeholder="Acceptance Criteria"
                     name="acceptanceCriteria"
@@ -132,9 +158,9 @@ class UpdateGroupPost extends Component {
                     onChange={this.onChange}
                   >
                     <option value="">Select Status</option>
-                    <option value="TO_DO">ACTIVE</option>
-                    <option value="IN_PROGRESS">IN GAME</option>
-                    <option value="DONE">CLOSED</option>
+                    <option value="ACTIVE">ACTIVE</option>
+                    <option value="IN_GAME">IN GAME</option>
+                    <option value="CLOSED">CLOSED</option>
                   </select>
                 </div>
 

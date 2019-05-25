@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class GroupPost {
@@ -21,12 +22,12 @@ public class GroupPost {
     private String body;
     private String status;
     private String acceptanceCriteria;
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     @Column(updatable = false)
     private Date created_At;
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private Date dueDate;
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private Date updated_At;
     @Column(updatable = false)
     private String groupIdentifier;
@@ -35,6 +36,7 @@ public class GroupPost {
     @JoinColumn(name = "backlog_id", updatable = false, nullable = false)
     @JsonIgnore
     private Backlog backlog;
+
 
     public User getAuthor() {
         return author;
@@ -46,6 +48,9 @@ public class GroupPost {
 
     @ManyToOne
     private User author;
+
+    @OneToMany(mappedBy = "post")
+    private List<Comment>comments;
 
     public Backlog getBacklog() {
         return backlog;

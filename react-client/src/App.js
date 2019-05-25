@@ -19,6 +19,8 @@ import Landing from "./components/Layout/Landing";
 import AddGroupPost from "./components/GroupBoard/GroupPost/AddGroupPost";
 import GroupBoard from "./components/GroupBoard/GroupBoard";
 import UpdateGroupPost from "./components/GroupBoard/GroupPost/UpdateGroupPost";
+import AddComment from "./components/GroupBoard/GroupPost/Comment/AddComment";
+import Comment from "./components/GroupBoard/GroupPost/Comment/Comment";
 
 const jwtToken = localStorage.jwtToken;
 
@@ -71,6 +73,8 @@ class App extends Component {
                 path="/updateGroupPost/:backlog_id/:gp_id"
                 component={UpdateGroupPost}
               />
+              <Route exact path="/addComment/:gp_id" component={AddComment} />
+              <Route exact path="/getComments/:gp_id" component={Comment} />
             </Switch>
           </div>
         </Router>

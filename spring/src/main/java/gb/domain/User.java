@@ -29,7 +29,30 @@ public class User implements UserDetails {
     private String confirmPassword;
 
     @ManyToMany(mappedBy = "usersInGroup")
+    @JsonIgnore
     private List<Groups> myGroups;
+
+    public List<Groups> getMyGroups() {
+        return myGroups;
+    }
+
+    public void setMyGroups(List<Groups> myGroups) {
+        this.myGroups = myGroups;
+    }
+
+
+
+    @OneToMany(mappedBy = "author")
+    @JsonIgnore
+    private List<Comment>comments;
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
 
     public Long getId() {
         return id;

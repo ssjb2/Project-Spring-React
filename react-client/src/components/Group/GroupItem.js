@@ -2,12 +2,15 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { deleteGroup } from "../../actions/groupActions";
-
+import { deleteGroup, joinGroup } from "../../actions/groupActions";
 class GroupItem extends Component {
   onDeleteClick = id => {
     this.props.deleteGroup(id);
   };
+  onJoinClick = id => {
+    this.props.joinGroup(id);
+  };
+
   render() {
     const { group } = this.props;
     return (
@@ -21,6 +24,7 @@ class GroupItem extends Component {
               <h3>{group.groupName}</h3>
               <p>{group.description}</p>
             </div>
+
             <div className="col-md-4 d-none d-lg-block">
               <ul className="list-group">
                 <Link to={`/GroupBoard/${group.groupIdentifier}`}>
@@ -41,6 +45,13 @@ class GroupItem extends Component {
                   <i className="fa fa-minus-circle pr-1"> Delete Group</i>
 </li>
 */}
+
+                <li
+                  className="list-group-item join"
+                  onClick={this.onJoinClick.bind(this, group.groupIdentifier)}
+                >
+                  <i className="fa fa-plus pr-1"> Join group</i>
+                </li>
               </ul>
             </div>
           </div>
@@ -53,7 +64,8 @@ class GroupItem extends Component {
 GroupItem.propTypes = {
   deleteGroup: PropTypes.func.isRequired
 };
+
 export default connect(
   null,
-  { deleteGroup }
+  { deleteGroup, joinGroup }
 )(GroupItem);

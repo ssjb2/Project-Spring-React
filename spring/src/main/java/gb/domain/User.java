@@ -28,6 +28,53 @@ public class User implements UserDetails {
     @Transient
     private String confirmPassword;
 
+    //profile
+    private String about;
+    private String hobbies;
+    private String games;
+    private String logo;
+    private Integer age;
+
+    public String getAbout() {
+        return about;
+    }
+
+    public void setAbout(String about) {
+        this.about = about;
+    }
+
+    public String getHobbies() {
+        return hobbies;
+    }
+
+    public void setHobbies(String hobbies) {
+        this.hobbies = hobbies;
+    }
+
+    public String getGames() {
+        return games;
+    }
+
+    public void setGames(String games) {
+        this.games = games;
+    }
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
     @ManyToMany(mappedBy = "usersInGroup")
     @JsonIgnore
     private List<Groups> myGroups;
@@ -39,6 +86,7 @@ public class User implements UserDetails {
     public void setMyGroups(List<Groups> myGroups) {
         this.myGroups = myGroups;
     }
+
 
 
 

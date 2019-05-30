@@ -38,7 +38,8 @@ public class GroupPostService {
             groupPost.setGroupIdentifier(groupIdentifier);
 
             User user= userRepository.findByUsername(name);
-            groupPost.setAuthor(user);
+            if(groupPost.getAuthor()==null){
+            groupPost.setAuthor(user);}
             if (groupPost.getStatus() == "" || groupPost.getStatus() == null) {
                 groupPost.setStatus("ACTIVE");
             }

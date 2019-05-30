@@ -1,6 +1,7 @@
 package gb.services;
 
 
+import gb.domain.ProfileDTO;
 import gb.domain.User;
 import gb.exceptions.UsernameAlreadyExistsException;
 import gb.repositories.UserRepository;
@@ -27,4 +28,39 @@ public class UserService {
             throw new UsernameAlreadyExistsException("User with this username already exists");
         }
     }
+
+    public User findUsrByUsername(String username){
+        User user = userRepository.findByUsername(username);
+        return user;
+    }
+    public ProfileDTO getUserProfile(String username) {
+        try {
+            User user = userRepository.findByUsername(username);
+            ProfileDTO profil = new ProfileDTO();
+            profil.setId(user.getId());
+            profil.setUsername(user.getUsername());
+            profil.setAbout(user.getAbout());
+            profil.setAge(user.getAge());
+            profil.setGames(user.getGames());
+            profil.setLogo(user.getLogo());
+            profil.setHobbies(user.getHobbies());
+            return profil;
+        } catch (Exception e) {
+            throw new UsernameAlreadyExistsException("User does not exist");
+        }
+
+    }
+
+    public void saveUserProfile(String username, ProfileDTO profil){
+        User user = findUsrByUsername(username);
+        user.setAbout(profil.getAbout());
+        user.setLogo(profil.getLogo());
+        if(user.getLogo()==null){
+            user.setLogo("https://i.pinimg.com/236x/09/94/5f/09945fe83c94669cd0cfcddce4bae788--facebook-profile-avatar.jpg");
+        }
+        user.setGames(profil.getGames());
+        user.setHobbies(profil.getHobbies());
+        user.setAge(profil.getAge());
+        saveUser(user);
+     }
 }

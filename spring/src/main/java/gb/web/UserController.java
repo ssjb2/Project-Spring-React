@@ -1,5 +1,6 @@
 package gb.web;
 
+import gb.domain.ProfileDTO;
 import gb.domain.User;
 import gb.payload.JWTLoginSucessResponce;
 import gb.payload.LoginRequest;
@@ -15,12 +16,11 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+
+import java.security.Principal;
 
 import static gb.security.SecurityConstants.TOKEN_PREFIX;
 
@@ -69,5 +69,18 @@ public class UserController {
         String jwt = TOKEN_PREFIX + tokenProvider.generateToken(authentication);
 
         return ResponseEntity.ok(new JWTLoginSucessResponce(true, jwt));
+    }
+
+    @GetMapping("/profile/{username}")
+    public ResponseEntity<?> getProfil(@PathVariable String username) {
+        ProfileDTO profil = userService.getUserProfile(username);
+        return new ResponseEntity<ProfileDTO>(profil, HttpStatus.OK);
+    }
+
+    @PostMapping("profile/edit/{username}")
+    public ResponseEntity<?> editProfil(@PathVariable String username, @RequestBody ProfileDTO profil, Principal principal) {
+        if (username != principal.getName()) return new ResponseEntity<String>("No no no", HttpStatus.FORBIDDEN);
+        userService.saveUserProfile(principal.getName(), profil);
+        return new ResponseEntity<ProfileDTO>(profil, HttpStatus.CREATED);
     }
 }

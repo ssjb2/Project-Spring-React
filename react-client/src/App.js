@@ -21,6 +21,7 @@ import GroupBoard from "./components/GroupBoard/GroupBoard";
 import UpdateGroupPost from "./components/GroupBoard/GroupPost/UpdateGroupPost";
 import AddComment from "./components/GroupBoard/GroupPost/Comment/AddComment";
 import Comment from "./components/GroupBoard/GroupPost/Comment/Comment";
+import profil from "./components/Profil/profil";
 
 const jwtToken = localStorage.jwtToken;
 
@@ -73,8 +74,17 @@ class App extends Component {
                 path="/updateGroupPost/:backlog_id/:gp_id"
                 component={UpdateGroupPost}
               />
-              <Route exact path="/addComment/:gp_id" component={AddComment} />
-              <Route exact path="/getComments/:gp_id" component={Comment} />
+              <SecuredRoute
+                exact
+                path="/addComment/:gp_id"
+                component={AddComment}
+              />
+              <SecuredRoute
+                exact
+                path="/getComments/:gp_id"
+                component={Comment}
+              />
+              <Route exact path="/profile/:username" component={profil} />
             </Switch>
           </div>
         </Router>

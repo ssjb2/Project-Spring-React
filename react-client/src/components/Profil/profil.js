@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { getProfile } from "../../actions/profileActions";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import profilReducer from "../../reducers/profilReducer";
 
 class Profil extends Component {
   constructor() {
@@ -20,10 +19,26 @@ class Profil extends Component {
   componentDidMount() {
     const { username } = this.props.match.params;
     this.props.getProfile(username);
+    const { security } = this.props.security;
   }
+  editProfilButton() {
+    const { username } = this.props.match.params;
+    if (username === this.props.security.user.username) {
+      return (
+        <div>
+          <Link
+            to={`/profile/edit/${this.props.security.user.username}`}
+            className="btn btn-lg btn-info"
+          >
+            Edit profil
+          </Link>
+        </div>
+      );
+    }
+  }
+
   render() {
     const { profil } = this.props.profil;
-    console.log(this.props);
     return (
       <div className="container ">
         <div className="row">
@@ -32,6 +47,12 @@ class Profil extends Component {
               <div className="col-xs-12 col-sm-8 bg-light">
                 <div className="col-sm-4 text-center">
                   <img src={profil.logo} className="rounded-circle profil" />
+                </div>
+                <div className="col-sm-4 text-center">
+                  <br />
+                  {this.editProfilButton()}
+                  <br />
+                  <hr />
                 </div>
                 <h2>{profil.username}</h2>
                 <p>
@@ -59,11 +80,13 @@ class Profil extends Component {
 Profil.propTypes = {
   profil: PropTypes.object.isRequired,
   getProfil: PropTypes.func.isRequired,
-  errors: PropTypes.object.isRequired
+  errors: PropTypes.object.isRequired,
+  security: PropTypes.object.isRequired
 };
 const mapStateToProps = state => ({
   profil: state.profil,
-  errors: state.errors
+  errors: state.errors,
+  security: state.security
 });
 
 export default connect(

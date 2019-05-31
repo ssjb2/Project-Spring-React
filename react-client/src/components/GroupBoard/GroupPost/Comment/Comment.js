@@ -20,6 +20,7 @@ class Comment extends Component {
   render() {
     const comments2 = this.props.comments;
     console.log(this.props.comments);
+    const { gp_id } = this.props.match.params;
 
     return (
       <div className="projects">
@@ -31,6 +32,11 @@ class Comment extends Component {
             >
               Back to Group Board
             </button>
+            <div>
+              <Link to={`/addComment/${gp_id}`} className="btn btn-danger">
+                Add Comment
+              </Link>
+            </div>
             <div className="col-md-12">
               <h1 className="display-4 text-center">Comments</h1>
               <br />

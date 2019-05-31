@@ -22,6 +22,7 @@ import UpdateGroupPost from "./components/GroupBoard/GroupPost/UpdateGroupPost";
 import AddComment from "./components/GroupBoard/GroupPost/Comment/AddComment";
 import Comment from "./components/GroupBoard/GroupPost/Comment/Comment";
 import profil from "./components/Profil/profil";
+import updateProfil from "./components/Profil/updateProfil";
 
 const jwtToken = localStorage.jwtToken;
 
@@ -84,7 +85,16 @@ class App extends Component {
                 path="/getComments/:gp_id"
                 component={Comment}
               />
-              <Route exact path="/profile/:username" component={profil} />
+              <SecuredRoute
+                exact
+                path="/profile/:username"
+                component={profil}
+              />
+              <SecuredRoute
+                exact
+                path="/profile/edit/:username"
+                component={updateProfil}
+              />
             </Switch>
           </div>
         </Router>

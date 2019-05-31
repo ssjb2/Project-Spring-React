@@ -66,8 +66,9 @@ public class GroupPostService {
 
     public GroupPost updateByGroupSequence(GroupPost uupdatedPost, String backlog_id, String pt_id, String name) {
         GroupPost groupPost = findGPByGroupSequnce(backlog_id,pt_id);
-
+User user = userRepository.findByUsername(name);
         groupPost = uupdatedPost;
+        groupPost.setAuthor(user);
         return groupPostRepository.save(groupPost);
     }
 

@@ -30,6 +30,9 @@ public class GroupsService {
                 groups.setBacklog(backlog);
                 backlog.setGroup(groups);
                 backlog.setGroupIdentifier(groups.getGroupIdentifier().toUpperCase());
+                if(groups.getCountUsers()==null){
+                    groups.setCountUsers(0);
+                }
             }
             if(groups.getId()!=null){
                 groups.setBacklog(backlogRepository.findByGroupIdentifier(groups.getGroupIdentifier().toUpperCase()));
@@ -73,6 +76,7 @@ public class GroupsService {
         User user = userRepository.findByUsername(username);
         if(groups.getUsersInGroup().contains(user)) throw new GroupIdException("You are already in this group '"+groupId+"'")   ;
         groups.addMember(user);
+        groups.setCountUsers(groups.getCountUsers()+1);
         groupsRepository.save(groups);
 
     }

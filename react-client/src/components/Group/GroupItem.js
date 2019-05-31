@@ -9,8 +9,51 @@ class GroupItem extends Component {
   };
   onJoinClick = id => {
     this.props.joinGroup(id);
+    window.location.reload();
   };
 
+  userInGroup() {
+    let x = 0;
+    const { group } = this.props;
+    console.log(group);
+    console.log(group.usersInGroup);
+    if (group.countUsers === 0) {
+      return (
+        <li
+          className="list-group-item join"
+          onClick={this.onJoinClick.bind(this, group.groupIdentifier)}
+        >
+          <i className="fa fa-plus pr-1"> Join group</i>
+        </li>
+      );
+    }
+    for (const prop in group.usersInGroup) {
+      console.log(this.props.security.user.username + "js");
+      console.log(group.usersInGroup);
+      console.log(group.countUsers + "sd");
+      console.log(group);
+      if (
+        group.usersInGroup[prop].username === this.props.security.user.username
+      )
+        x = 1;
+    }
+    if (x === 0) {
+      return (
+        <li
+          className="list-group-item join"
+          onClick={this.onJoinClick.bind(this, group.groupIdentifier)}
+        >
+          <i className="fa fa-plus pr-1"> Join group</i>
+        </li>
+      );
+    } else {
+      return (
+        <li className="list-group-item bg-light">
+          <i className="fas fa-user-check text-info"> You are a member</i>
+        </li>
+      );
+    }
+  }
   render() {
     const { group } = this.props;
     return (
@@ -23,6 +66,7 @@ class GroupItem extends Component {
             <div className="col-lg-6 col-md-4 col-8">
               <h3>{group.groupName}</h3>
               <p>{group.description}</p>
+              <p>Members: {group.countUsers}</p>
             </div>
 
             <div className="col-md-4 d-none d-lg-block">
@@ -32,11 +76,11 @@ class GroupItem extends Component {
                     <i className="fa fa-flag-checkered pr-1"> Group Board </i>
                   </li>
                 </Link>
-                <Link to={`/updateGroup/${group.groupIdentifier}`}>
+                {/*<Link to={`/updateGroup/${group.groupIdentifier}`}>
                   <li className="list-group-item update">
                     <i className="fa fa-edit pr-1"> Update Group Info</i>
                   </li>
-                </Link>
+    </Link>*/}
                 {/* 
                 <li
                   className="list-group-item delete"
@@ -46,12 +90,7 @@ class GroupItem extends Component {
 </li>
 */}
 
-                <li
-                  className="list-group-item join"
-                  onClick={this.onJoinClick.bind(this, group.groupIdentifier)}
-                >
-                  <i className="fa fa-plus pr-1"> Join group</i>
-                </li>
+                <div>{this.userInGroup()}</div>
               </ul>
             </div>
           </div>
@@ -62,10 +101,14 @@ class GroupItem extends Component {
 }
 
 GroupItem.propTypes = {
-  deleteGroup: PropTypes.func.isRequired
+  deleteGroup: PropTypes.func.isRequired,
+  security: PropTypes.object.isRequired
 };
 
+const mapStateToProps = state => ({
+  security: state.security
+});
 export default connect(
-  null,
+  mapStateToProps,
   { deleteGroup, joinGroup }
 )(GroupItem);

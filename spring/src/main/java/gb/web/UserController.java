@@ -79,7 +79,7 @@ public class UserController {
 
     @PostMapping("profile/edit/{username}")
     public ResponseEntity<?> editProfil(@PathVariable String username, @RequestBody ProfileDTO profil, Principal principal) {
-        if (username != principal.getName()) return new ResponseEntity<String>("No no no", HttpStatus.FORBIDDEN);
+        if (!username.equals(principal.getName())) return new ResponseEntity<String>("No no no", HttpStatus.FORBIDDEN);
         userService.saveUserProfile(principal.getName(), profil);
         return new ResponseEntity<ProfileDTO>(profil, HttpStatus.CREATED);
     }

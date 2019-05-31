@@ -34,6 +34,17 @@ public class Groups {
     private Date created_At;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date updated_At;
+
+    private Integer countUsers;
+
+    public Integer getCountUsers() {
+        return countUsers;
+    }
+
+    public void setCountUsers(Integer countUsers) {
+        this.countUsers = countUsers;
+    }
+
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "group")
     @JsonIgnore
     private Backlog backlog;

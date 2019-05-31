@@ -12,15 +12,22 @@ class UpdateGroup extends Component {
       groupName: "",
       groupIdentifier: "",
       description: "",
+      countUsers: "",
       errors: {}
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
   componentWillReceiveProps(nextProps) {
-    const { id, groupName, groupIdentifier, description } = nextProps.group;
+    const {
+      id,
+      groupName,
+      groupIdentifier,
+      description,
+      countUsers
+    } = nextProps.group;
 
-    this.setState({ id, groupName, groupIdentifier, description });
+    this.setState({ id, groupName, groupIdentifier, description, countUsers });
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
     }
@@ -39,7 +46,8 @@ class UpdateGroup extends Component {
       id: this.state.id,
       groupName: this.state.groupName,
       groupIdentifier: this.state.groupIdentifier,
-      description: this.state.description
+      description: this.state.description,
+      countUsers: this.state.countUsers
     };
 
     this.props.createGroup(updateGroup, this.props.history);

@@ -11,7 +11,11 @@ class CommentItem extends Component {
           <div className="row">
             <div className="col-lg-6 col-md-4 col-8">
               <p>
-                Author: {comment.author.username} {comment.created_At}
+                Author:{" "}
+                <Link to={`/profile/${comment.author.username}`}>
+                  {comment.author.username}
+                </Link>{" "}
+                {comment.created_At}
               </p>
               <p>{comment.body}</p>
             </div>

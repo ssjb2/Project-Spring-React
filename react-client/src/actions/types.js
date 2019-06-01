@@ -12,3 +12,7 @@ export const SET_CURRENT_USER = "SET_CURRENT_USER";
 export const GET_COMMENTS = "GET_COMMENTS";
 
 export const GET_PROFILE = "GET_PROFILE";
+
+export const GET_FRIENDS = "GET_FRIENDS"
+export const GET_SENT_INV= "GET_SENT_INV"
+export const GET_REC_INV="GET_REC_INV"

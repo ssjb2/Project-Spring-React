@@ -28,6 +28,13 @@ class Header extends Component {
             </Link>
           </li>
         </ul>
+        <ul className="navbar-nav mr-auto">
+          <li className="nav-item">
+            <Link className="nav-link" to={`/friends`}>
+              Friends
+            </Link>
+          </li>
+        </ul>
         <ul className="navbar-nav ml-auto">
           <li className="nav-item">
             <Link className="nav-link" to="/dashboard">

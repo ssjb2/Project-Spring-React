@@ -22,7 +22,7 @@ public class User implements UserDetails {
     @Column(unique = true)
     private String username;
     @NotBlank(message = "Password can not be blank")
-    @Size(min=6)
+    @Size(min = 6)
     private String password;
 
     @Transient
@@ -87,12 +87,62 @@ public class User implements UserDetails {
         this.myGroups = myGroups;
     }
 
+public void addFriend(User user){
+        this.friends.add(user);
+}
+public void sendInv(User user){
+        this.sendInvites.add(user);
+}
+public void receiveInv(User user){
+        this.receiveInvites.add(user);
+}
+public void removesSendedInv(User user){
+        this.sendInvites.remove(user);
 
+}
+public void removeReceivedInv(User user){
+        this.receiveInvites.remove(user);
+}
 
+    @ManyToMany
+    @JsonIgnore
+    private List<User> friends;
+
+    @ManyToMany
+    @JsonIgnore
+
+    private List<User> sendInvites;
+    @ManyToMany
+    @JsonIgnore
+    private List<User> receiveInvites;
+
+    public List<User> getFriends() {
+        return friends;
+    }
+
+    public void setFriends(List<User> friends) {
+        this.friends = friends;
+    }
+
+    public List<User> getSendInvites() {
+        return sendInvites;
+    }
+
+    public void setSendInvites(List<User> sendInvites) {
+        this.sendInvites = sendInvites;
+    }
+
+    public List<User> getReceiveInvites() {
+        return receiveInvites;
+    }
+
+    public void setReceiveInvites(List<User> receiveInvites) {
+        this.receiveInvites = receiveInvites;
+    }
 
     @OneToMany(mappedBy = "author")
     @JsonIgnore
-    private List<Comment>comments;
+    private List<Comment> comments;
 
     public List<Comment> getComments() {
         return comments;
@@ -118,7 +168,6 @@ public class User implements UserDetails {
     public void setUsername(String username) {
         this.username = username;
     }
-
 
 
     @Override

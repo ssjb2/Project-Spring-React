@@ -1,5 +1,6 @@
 package gb.web;
 
+import gb.domain.FriendDTO;
 import gb.domain.ProfileDTO;
 import gb.domain.User;
 import gb.payload.JWTLoginSucessResponce;
@@ -82,5 +83,38 @@ public class UserController {
         if (!username.equals(principal.getName())) return new ResponseEntity<String>("No no no", HttpStatus.FORBIDDEN);
         userService.saveUserProfile(principal.getName(), profil);
         return new ResponseEntity<ProfileDTO>(profil, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/friends")
+    public Iterable<FriendDTO> getFriends(Principal principal) {
+        return userService.findFriends(principal.getName());
+    }
+
+    @PostMapping("/invite/{username}")
+    public ResponseEntity<?> sendInvite(@PathVariable String username, Principal principal) {
+        System.out.println(username);
+        System.out.println(principal.getName());
+        userService.sendInvites(username, principal.getName());
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/invite/accept/{username}")
+    public ResponseEntity<?> acceptInv(@PathVariable String username, Principal principal) {
+        userService.acceptInv(username, principal.getName());
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+    @PostMapping("/invite/decline/{username}")
+    public ResponseEntity<?> declineInv(@PathVariable String username, Principal principal) {
+        userService.declineInv(username, principal.getName());
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+    @GetMapping("/invite/view/sentInv")
+    public Iterable<FriendDTO> getSentInvites(Principal principal) {
+        return userService.findSentInvites(principal.getName());
+    }
+
+    @GetMapping("/invite/view/recInv")
+    public Iterable<FriendDTO> getRecInvites(Principal principal) {
+        return userService.findReceiveInvites(principal.getName());
     }
 }

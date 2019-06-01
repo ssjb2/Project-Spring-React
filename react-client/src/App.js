@@ -23,6 +23,7 @@ import AddComment from "./components/GroupBoard/GroupPost/Comment/AddComment";
 import Comment from "./components/GroupBoard/GroupPost/Comment/Comment";
 import profil from "./components/Profil/profil";
 import updateProfil from "./components/Profil/updateProfil";
+import Friends from "./components/Friends/Friends";
 
 const jwtToken = localStorage.jwtToken;
 
@@ -95,6 +96,7 @@ class App extends Component {
                 path="/profile/edit/:username"
                 component={updateProfil}
               />
+              <SecuredRoute exact path="/friends" component={Friends} />
             </Switch>
           </div>
         </Router>

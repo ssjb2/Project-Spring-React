@@ -109,3 +109,9 @@ span.tags {
   float: left;
   padding-top: 36px;
 }
+.pd-top {
+  padding-top: 30px;
+}
+.pd-bot {
+  padding-bottom: 30px;
+}

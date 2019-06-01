@@ -40,36 +40,33 @@ class Profil extends Component {
   render() {
     const { profil } = this.props.profil;
     return (
-      <div className="container ">
-        <div className="row">
-          <div className="col-sm-8 text-center">
-            <div className="col-sm-12">
-              <div className="col-xs-12 col-sm-8 bg-light">
-                <div className="col-sm-4 text-center">
-                  <img src={profil.logo} className="rounded-circle profil" />
-                </div>
-                <div className="col-sm-4 text-center">
-                  <br />
-                  {this.editProfilButton()}
-                  <br />
-                  <hr />
-                </div>
-                <h2>{profil.username}</h2>
-                <p>
-                  <strong>About: </strong>
-                  {profil.about}
-                </p>
-                <p>
-                  <strong>Hobbies: </strong> {profil.hobbies}
-                </p>
-                <p>
-                  <strong>Games: </strong> {profil.games}
-                </p>
-                <p>
-                  <strong>Age: </strong> {profil.age}
-                </p>
-              </div>
-            </div>
+      <div className="container col-sm-12 col-md-10 col-lg-8 col-xl-6">
+        <div class="row col-sm-12 text-center bg-light">
+          <div className="col-sm-4 pd-bot">
+            <img src={profil.logo} className="rounded-circle profil pd-bot" />
+
+            <br />
+            {this.editProfilButton()}
+            <br />
+          </div>
+          <div className="col-sm-8 text-center pd-top">
+            <h2>{profil.username}</h2>
+            <br />
+            <p class="text-sm-left ">
+              <p>
+                <strong>About: </strong>
+                {profil.about}
+              </p>
+              <p>
+                <strong>Hobbies: </strong> {profil.hobbies}
+              </p>
+              <p>
+                <strong>Games: </strong> {profil.games}
+              </p>
+              <p>
+                <strong>Age: </strong> {profil.age}
+              </p>
+            </p>
           </div>
         </div>
       </div>

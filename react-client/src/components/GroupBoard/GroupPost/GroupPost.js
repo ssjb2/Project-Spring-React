@@ -41,9 +41,7 @@ class GroupPost extends Component {
           <p className="card-text text-truncate ">
             <i className="fas fa-check" /> {group_post.acceptanceCriteria}
           </p>
-          <p className="card-text text-truncate ">
-            time: <i className="fas fa-check" /> {group_post.dueDate}
-          </p>
+          <p className="card-text text-truncate ">time: {group_post.dueDate}</p>
           {this.editPost()}
 
           <Link to={`/getComments/${group_post.id}`} className="btn btn-dark">
